@@ -1,8 +1,9 @@
+#!/bin/bash
 # =========================================================================
 # =========================================================================
 #
 #	lmssetupAlpine
-#	  Container configuration and run-scripts setup.
+#	  Copy run scripts to /userbin.
 #
 # =========================================================================
 #
@@ -10,28 +11,28 @@
 # @version 0.0.2
 # @copyright © 2018. EarthWalk Software.
 # @license Licensed under the GNU General Public License, GPL-3.0-or-later.
-# @package ewsdocker/alpine-nginx-client
-# @subpackage lmssetupAlpineContainer
+# @package ewsdocker/debian-base
+# @subpackage lmssetupAlpine
 #
 # =========================================================================
 #
 #	Copyright © 2018. EarthWalk Software
 #	Licensed under the GNU General Public License, GPL-3.0-or-later.
 #
-#   This file is part of ewsdocker/alpine-nginx-client.
+#   This file is part of ewsdocker/debian-base.
 #
-#   ewsdocker/alpine-nginx-client is free software: you can redistribute 
+#   ewsdocker/debian-base is free software: you can redistribute 
 #   it and/or modify it under the terms of the GNU General Public License 
 #   as published by the Free Software Foundation, either version 3 of the 
 #   License, or (at your option) any later version.
 #
-#   ewsdocker/alpine-nginx-client is distributed in the hope that it will 
+#   ewsdocker/debian-base is distributed in the hope that it will 
 #   be useful, but WITHOUT ANY WARRANTY; without even the implied warranty 
 #   of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #   GNU General Public License for more details.
 #
 #   You should have received a copy of the GNU General Public License
-#   along with ewsdocker/alpine-nginx-client.  If not, see 
+#   along with ewsdocker/debian-base.  If not, see 
 #   <http://www.gnu.org/licenses/>.
 #
 # =========================================================================
@@ -52,12 +53,12 @@
 # =========================================================================
 function setupAlpine()
 {
-	mkdir -p /usrlocal/share/lms
-	mkdir -p /usrlocal/lib/lms
+	mkdir -p /usrlocal/share/lms-alpine
+	mkdir -p /usrlocal/lib/lms-alpine
 	mkdir -p /usrlocal/bin
 
 	cp -r /usr/local/share/*      /usrlocal/share
-	cp -r /usr/local/lib/lms/*    /usrlocal/lib/lms
+	cp -r /usr/local/lib/lms-alpine/*    /usrlocal/lib/lms-alpine
 
 	cd /usr/local/bin
 

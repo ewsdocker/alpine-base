@@ -49,6 +49,7 @@ ENV LMSBUILD_REGISTRY=""
 
 ENV LMSBUILD_DOCKER="${LMSBUILD_REPO}/${LMSBUILD_NAME}:${LMSBUILD_VERSION}" 
 ENV LMSBUILD_PACKAGE="nimmis/alpine-micro:edge"
+ENV LMSBUILD_BASE="alpine:3.8.0"
 
 # =========================================================================
 
@@ -72,6 +73,7 @@ RUN apk update \
             wget \
             zip \
  && rm -rf /var/cache/apk/* \
+ && echo "${LMSBUILD_BASE}" >  /etc/ewsdocker-builds.txt \
  && printf "${LMSBUILD_DOCKER} (${LMSBUILD_PACKAGE}), %s @ %s\n" `date '+%Y-%m-%d'` `date '+%H:%M:%S'` >> /etc/ewsdocker-builds.txt 
 
 # =========================================================================
@@ -81,8 +83,10 @@ COPY scripts/. /
 # =========================================================================
 
 RUN ln -s /usr/bin/lms/setup-alpine /usr/bin/lms-setup-alpine \
- && chmod -R 775 /usr/local/bin/* 
+ && ln -s /usr/bin/lms/alpine-version /usr/bin/lms-alpine-version \
+ && chmod -R 775 /usr/local/bin/* \
+ && chmod -R +x /usr/bin/*
 
 # =========================================================================
 
-CMD ["/bin/ash"]
+CMD ["/bin/bash"]

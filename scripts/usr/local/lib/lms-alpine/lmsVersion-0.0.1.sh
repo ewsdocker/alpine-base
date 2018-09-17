@@ -2,17 +2,17 @@
 # =========================================================================
 # =========================================================================
 #
-#	lms/setup-alpine
-#	  
+#	lmsVersion
+#	  Build version message to be displayed
 #
 # =========================================================================
 #
 # @author Jay Wheeler.
-# @version 0.0.2
+# @version 0.0.1
 # @copyright © 2018. EarthWalk Software.
 # @license Licensed under the GNU General Public License, GPL-3.0-or-later.
 # @package ewsdocker/alpine-base
-# @subpackage lms-setup-alpine
+# @subpackage lmsVersion
 #
 # =========================================================================
 #
@@ -38,36 +38,45 @@
 # =========================================================================
 # =========================================================================
 
-. /usr/local/lib/lms-alpine/lmsconCli-0.0.2.sh
-. /usr/local/lib/lms-alpine/lmsVersion-0.0.1.sh
-
-. /usr/local/lib/lms-alpine/lmssetupAlpine-0.0.2.sh
-. /usr/local/lib/lms-alpine/lmsVersion-0.0.1.sh
-
-# =========================================================================
+# ***********************************************************************************************************
 #
-#    Display the version stack
+#    lmsVersion
 #
-# =========================================================================
-
-echo
-echo
-echo "Installing \"${LMSBUILD_DOCKER}\""
-echo
-
-lmsVersion
-
-# =========================================================================
+#		output version message
 #
-#    copy /usr/local subdirectories to the directory specified in LMS_BASE
-#		environment variable in the cli parameters to start setup
+#	parameters:
+#		none - response is placed in global lms_version
 #
-# =========================================================================
+#	returns:
+#		0 = no error
+#
+# ***********************************************************************************************************
+function lmsVersion()
+{
+    local lines=()
+    mapfile -t lines < /etc/ewsdocker-builds.txt
 
-setupAlpine
+    local lsize=${#lines[@]}
+    local lnumber=0
 
-echo
-echo "Internal setup completed."
-echo
+    echo
+    echo "************************************"
+    echo
 
-exit 0
+    (( lsize-- ))
+
+    while [ ${lsize} -ge 0 ]
+    do
+        [[ ${lnumber} -eq 0 ]] || echo -n "    " && lmsDeclareStr "lmsver_string" "${lines[$lsize]}"
+        echo "${lines[$lsize]}"
+
+        (( ++lnumber ))
+        (( --lsize ))
+    done
+
+    echo
+    echo "************************************"
+    echo
+
+    return 0    
+}

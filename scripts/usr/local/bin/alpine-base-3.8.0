@@ -2,17 +2,17 @@
 # =========================================================================
 # =========================================================================
 #
-#	lms/setup-alpine
-#	  
+#	alpine-base
+#	  docker run command for alpine-base.
 #
 # =========================================================================
 #
 # @author Jay Wheeler.
-# @version 0.0.2
+# @version 3.8.0
 # @copyright © 2018. EarthWalk Software.
 # @license Licensed under the GNU General Public License, GPL-3.0-or-later.
-# @package ewsdocker/alpine-base
-# @subpackage lms-setup-alpine
+# @package alpine-base
+# @subpackage alpine-base.run
 #
 # =========================================================================
 #
@@ -36,38 +36,11 @@
 #   <http://www.gnu.org/licenses/>.
 #
 # =========================================================================
-# =========================================================================
 
-. /usr/local/lib/lms-alpine/lmsconCli-0.0.2.sh
-. /usr/local/lib/lms-alpine/lmsVersion-0.0.1.sh
-
-. /usr/local/lib/lms-alpine/lmssetupAlpine-0.0.2.sh
-. /usr/local/lib/lms-alpine/lmsVersion-0.0.1.sh
-
-# =========================================================================
-#
-#    Display the version stack
-#
-# =========================================================================
-
-echo
-echo
-echo "Installing \"${LMSBUILD_DOCKER}\""
-echo
-
-lmsVersion
-
-# =========================================================================
-#
-#    copy /usr/local subdirectories to the directory specified in LMS_BASE
-#		environment variable in the cli parameters to start setup
-#
-# =========================================================================
-
-setupAlpine
-
-echo
-echo "Internal setup completed."
-echo
-
-exit 0
+docker run -it \
+           --rm \
+           -v /etc/localtime:/etc/localtime:ro \
+           -v ${HOME}/workspace-base-3.8.0:/workspace \
+           -v ${HOME}/.config/docker/alpine-base-3.8.0:/root \
+           --name=alpine-base-3.8.0 \
+       ewsdocker/alpine-base:3.8.0

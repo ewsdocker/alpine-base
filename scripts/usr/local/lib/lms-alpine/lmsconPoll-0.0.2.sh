@@ -1,73 +1,64 @@
-#!/bin/bash
 # =========================================================================
 # =========================================================================
 #
-#	lms/setup-alpine
-#	  
+#	lmsconPoll
+#     poll the console for input
 #
 # =========================================================================
 #
 # @author Jay Wheeler.
 # @version 0.0.2
-# @copyright © 2018. EarthWalk Software.
+# @copyright © 2016, 2018. EarthWalk Software.
 # @license Licensed under the GNU General Public License, GPL-3.0-or-later.
-# @package ewsdocker/alpine-base
-# @subpackage lms-setup-alpine
+# @package ewsdocker/debian-kaptain-menu
+# @subpackage lmsconPoll
 #
 # =========================================================================
 #
-#	Copyright © 2018. EarthWalk Software
+#	Copyright © 2016, 2018. EarthWalk Software
 #	Licensed under the GNU General Public License, GPL-3.0-or-later.
 #
-#   This file is part of ewsdocker/alpine-base.
+#   This file is part of ewsdocker/debian-kaptain-menu.
 #
-#   ewsdocker/alpine-base is free software: you can redistribute 
+#   ewsdocker/debian-kaptain-menu is free software: you can redistribute 
 #   it and/or modify it under the terms of the GNU General Public License 
 #   as published by the Free Software Foundation, either version 3 of the 
 #   License, or (at your option) any later version.
 #
-#   ewsdocker/alpine-base is distributed in the hope that it will 
+#   ewsdocker/debian-kaptain-menu is distributed in the hope that it will 
 #   be useful, but WITHOUT ANY WARRANTY; without even the implied warranty 
 #   of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #   GNU General Public License for more details.
 #
 #   You should have received a copy of the GNU General Public License
-#   along with ewsdocker/alpine-base.  If not, see 
+#   along with ewsdocker/debian-kaptain-menu.  If not, see 
 #   <http://www.gnu.org/licenses/>.
 #
 # =========================================================================
 # =========================================================================
 
-. /usr/local/lib/lms-alpine/lmsconCli-0.0.2.sh
-. /usr/local/lib/lms-alpine/lmsVersion-0.0.1.sh
-
-. /usr/local/lib/lms-alpine/lmssetupAlpine-0.0.2.sh
-. /usr/local/lib/lms-alpine/lmsVersion-0.0.1.sh
+declare -a lmscon_reply=()
 
 # =========================================================================
 #
-#    Display the version stack
+#   lmsconPoll
+#		check for input from keyboard
+#
+#	parameters:
+#		none
+#	returns:
+#		0 = no errors
+#		non-zero = error code
 #
 # =========================================================================
+function lmsconPoll()
+{
+	read -t 1
+	[[ -z "${REPLY}" ]] && return 0
 
-echo
-echo
-echo "Installing \"${LMSBUILD_DOCKER}\""
-echo
+	lmscon_reply=()
+	strExplode "${REPLY}" " " lmscon_reply
 
-lmsVersion
+	return 1
+}
 
-# =========================================================================
-#
-#    copy /usr/local subdirectories to the directory specified in LMS_BASE
-#		environment variable in the cli parameters to start setup
-#
-# =========================================================================
-
-setupAlpine
-
-echo
-echo "Internal setup completed."
-echo
-
-exit 0
