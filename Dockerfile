@@ -7,7 +7,7 @@
 # ========================================================================================
 #
 # @author Jay Wheeler.
-# @version 3.8.0
+# @version 3.8.1
 # @copyright © 2018. EarthWalk Software.
 # @license Licensed under the GNU General Public License, GPL-3.0-or-later.
 # @package alpine-base
@@ -36,19 +36,19 @@
 #
 # ========================================================================================
 # ========================================================================================
-FROM  nimmis/alpine-micro:edge
+FROM  nimmis/alpine-micro:3.8
 
 # =========================================================================
 
 ENV LMS_BASE="/usr/local"
 
-ENV LMSBUILD_VERSION="3.8.0"
+ENV LMSBUILD_VERSION="3.8.1"
 ENV LMSBUILD_NAME="alpine-base" 
 ENV LMSBUILD_REPO=ewsdocker
 ENV LMSBUILD_REGISTRY=""
 
 ENV LMSBUILD_DOCKER="${LMSBUILD_REPO}/${LMSBUILD_NAME}:${LMSBUILD_VERSION}" 
-ENV LMSBUILD_PACKAGE="nimmis/alpine-micro:edge"
+ENV LMSBUILD_PACKAGE="nimmis/alpine-micro:3.8"
 ENV LMSBUILD_BASE="alpine:3.8.0"
 
 # =========================================================================
