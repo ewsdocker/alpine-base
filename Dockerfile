@@ -64,7 +64,6 @@ RUN apk update \
             dbus \
             findutils \
             grep \
-            nano \
             pciutils \
             shadow \
             unzip \
