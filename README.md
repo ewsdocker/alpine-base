@@ -1,4 +1,4 @@
-### ewsdocker/alpine-base:3.8.1
+### ewsdocker/alpine-base:3.10.0
 
 **ewsdocker/alpine-base** is based upon the latest (**edge**) version of the [nimmis/alpine-micro](https://github.com/nimmis/alpine-micro) docker image. It adds several system utilities and libraries that are nominally required to properly utilize the **library/alpine** docker image.  
 
@@ -14,16 +14,16 @@ The following scripts will download the the selected **ewsdocker/alpine-base** i
 
 The <i>default</i> values will install all directories and contents in the <b>docker host</b> user's home directory (refer to <a href="#mapping">Mapping docker host resources to the docker container</a>, below).  
 
-**ewsdocker/alpine-base:3.8.1**
+**ewsdocker/alpine-base:3.10.0**
   
     docker run --rm \
                -v ${HOME}/bin:/userbin \
                -v ${HOME}/.local:/usrlocal \
                -e LMS_BASE="${HOME}/.local" \
                -v ${HOME}/.config/docker:/conf \
-               -v ${HOME}/.config/docker/alpine-base-3.8.1:/root \
-               --name=alpine-base-3.8.1 \
-           ewsdocker/alpine-base:3.8.1 lms-setup-alpine  
+               -v ${HOME}/.config/docker/alpine-base-3.10.0:/root \
+               --name=alpine-base-3.10.0 \
+           ewsdocker/alpine-base:3.10.0 lms-setup-alpine  
 
 ____  
 
@@ -39,15 +39,15 @@ ____
 
 **Execution scripts**  
 
-**ewsdocker/alpine-base:3.8.1**  
+**ewsdocker/alpine-base:3.10.0**  
   
     docker run -d \
            --rm \
            -v /etc/localtime:/etc/localtime:ro \
-           -v ${HOME}/workspace-base-3.8.1:/workspace \
-           -v ${HOME}/.config/docker/alpine-base-3.8.1:/root \
-           --name=alpine-base-3.8.1 \
-       ewsdocker/alpine-base:3.8.1  
+           -v ${HOME}/workspace-base-3.10.0:/workspace \
+           -v ${HOME}/.config/docker/alpine-base-3.10.0:/root \
+           --name=alpine-base-3.10.0 \
+       ewsdocker/alpine-base:3.10.0  
 
 ____  
 
